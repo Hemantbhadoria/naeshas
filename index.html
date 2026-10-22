@@ -31,6 +31,10 @@
 
   .topbar { height: 69px; background: #fff; border-bottom: 1px solid #e9edf5; display: flex; align-items: center; padding: 4px 5px 0 20px; }
   .topbar h1 { font-size: 24px; font-weight: 400; color: #212427; line-height: 32px; flex: 1; }
+  .ai-btn { height: 34px; padding: 0 14px 0 11px; margin-right: 14px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #fff;
+            background: linear-gradient(135deg, #4945c6 0%, #7a4fe0 100%); box-shadow: 0 1px 2px rgba(73,69,198,.35); }
+  .ai-btn:hover { filter: brightness(1.08); box-shadow: 0 2px 8px rgba(73,69,198,.4); }
+  .ai-btn:focus-visible { outline: 2px solid #8e8bea; outline-offset: 2px; }
   .bell { width: 34px; height: 35px; border: 1px solid #e9edf5; border-radius: 50%; display: grid; place-items: center; color: #a1a9b8; margin-right: 24px; }
   .avatar { width: 40px; height: 40px; border-radius: 9999px; background: linear-gradient(135deg, #f0c27b, #8a6a4a); color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 500; }
 
@@ -62,6 +66,9 @@
   .card { position: absolute; background: #fff; border-radius: 8px; border: 1px solid transparent;
           box-shadow: 0 0 2px 0 rgba(0,0,0,.1), 0 2px 4px 0 rgba(0,0,0,.1); display: flex; flex-direction: column; }
   .card.editing { border-color: #928fdd; }
+  .card.pinned { box-shadow: 0 0 2px 0 rgba(0,0,0,.1), 0 2px 4px 0 rgba(0,0,0,.1), inset 0 3px 0 #4945c6; }
+  .pin-badge { display: inline-grid; place-items: center; width: 22px; height: 22px; margin-left: 6px; color: #4945c6; flex: none; }
+  .pin-badge svg { fill: #4945c6; fill-opacity: .18; }
   .card.dragging { opacity: .85; z-index: 5; box-shadow: 0 10px 25px rgba(0,0,0,.15); }
   .card-head { display: flex; align-items: center; padding: 16px 14px 0 20px; height: 37px; flex: none; }
   .card-title { font-size: 14px; font-weight: 500; color: #37348f; line-height: 21px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
@@ -264,6 +271,61 @@
   .acc-list { margin-top: 4px; }
   .share-add { margin-bottom: 2px; }
 
+  /* Zia AI panel */
+  .aipanel { position: fixed; top: 0; right: 0; bottom: 0; width: 440px; max-width: 100vw; background: #fff; box-shadow: -8px 6px 24px 0 rgba(91,91,91,.24); z-index: 45; display: flex; flex-direction: column; }
+  .ai-head { display: flex; align-items: center; gap: 12px; padding: 14px 12px 14px 16px; border-bottom: 1px solid #e0e0e0; flex: none; }
+  .ai-badge { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, #4945c6, #7a4fe0); flex: none; }
+  .ai-title { flex: 1; display: flex; flex-direction: column; }
+  .ai-title b { font-size: 15px; font-weight: 600; color: #171c26; }
+  .ai-title small { font-size: 12px; color: #616161; }
+  .ai-body { flex: 1; overflow-y: auto; padding: 16px; background: #f8f9fe; }
+  .ai-seg { grid-template-columns: 1fr 1fr; background: #ececf4; }
+  .ai-seg button { padding: 0 4px; gap: 5px; }
+  .ai-prevs { display: flex; flex-direction: column; gap: 10px; }
+  .ai-prev-card { border: 1px solid #e6e6e6; border-radius: 8px; background: #fff; overflow: hidden; }
+  .ai-prev-h { display: flex; align-items: center; gap: 6px; padding: 8px 8px 0 12px; }
+  .ai-prev-h .who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .ai-prev-h .who b { font-size: 13px; font-weight: 500; color: #37348f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ai-prev-h .who small { font-size: 11.5px; color: #8a8f98; }
+  .ai-prev-h .icon-btn { width: 26px; height: 26px; }
+  .ai-add { display: inline-flex; align-items: center; gap: 3px; height: 26px; padding: 0 9px 0 6px; border-radius: 6px; font-size: 12.5px; font-weight: 500; color: #4945c6; background: #f0f0fd; }
+  .ai-add:hover:not(:disabled) { background: #e3e2f9; }
+  .ai-add:disabled { color: #a5a7ab; background: #f5f5f7; cursor: not-allowed; }
+  .ai-prev { padding: 0; }
+  .ai-prev-body { position: relative; height: 190px; margin: 4px 4px 4px; }
+  .ai-prev-body .kpi { padding: 0 12px; }
+  .ai-prev-empty { height: 100%; display: grid; place-items: center; font-size: 13px; color: #838383; }
+  .ai-note-in { margin-top: 10px; font-size: 12.5px; line-height: 18px; color: #8a6200; background: #fff9e6; border-radius: 6px; padding: 8px 10px; }
+  .ai-stack { flex-direction: column; }
+  .ai-text { height: auto; min-height: 84px; margin-top: 0; background: #fff; resize: none; }
+  .ai-go { width: 100%; margin-top: 10px; justify-content: center; height: 38px; gap: 8px; background: linear-gradient(135deg, #4945c6, #7a4fe0); }
+  .ai-go:disabled { background: #f5f5f7; color: #a5a7ab; }
+  .ai-try { margin: 18px 0 8px; font-size: 12px; font-weight: 600; color: #8a8f98; letter-spacing: .04em; text-transform: uppercase; }
+  .ai-chips { display: flex; flex-direction: column; gap: 6px; }
+  .ai-chip { text-align: left; padding: 8px 12px; border: 1px solid #e6e6e6; border-radius: 8px; background: #fff; font-size: 13px; color: #37348f; }
+  .ai-chip:hover { border-color: #b9b7f2; background: #fafaff; }
+  .ai-out { margin-top: 18px; }
+  .ai-think { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #616161; padding: 12px 4px; }
+  .ai-think span { width: 6px; height: 6px; border-radius: 50%; background: #7a4fe0; animation: aidot 1s infinite ease-in-out; }
+  .ai-think span:nth-child(2) { animation-delay: .15s; } .ai-think span:nth-child(3) { animation-delay: .3s; margin-right: 6px; }
+  @keyframes aidot { 0%, 80%, 100% { opacity: .25; transform: scale(.8); } 40% { opacity: 1; transform: scale(1.1); } }
+  .ai-card { background: #fff; border: 1px solid #e6e6e6; border-radius: 10px; padding: 14px; box-shadow: 0 0 2px rgba(0,0,0,.06); }
+  .ai-understood { font-size: 13px; line-height: 19px; color: #37348f; background: #f5f5fe; border-radius: 6px; padding: 10px 12px; margin-bottom: 14px; }
+  .ai-card .flabel { font-size: 13px; font-weight: 500; color: #333; }
+  .ai-charts-h { margin: 16px 0 6px; font-size: 13px; font-weight: 600; color: #333; }
+  .ai-charts { border: 1px solid #ececf3; border-radius: 8px; max-height: 280px; overflow-y: auto; }
+  .ai-chart-row { display: flex; align-items: center; gap: 10px; padding: 7px 8px 7px 10px; }
+  .ai-chart-row + .ai-chart-row { border-top: 1px solid #f2f2f5; }
+  .ai-chart-row .who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .ai-chart-row .who b { font-size: 13px; font-weight: 500; color: #171c26; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ai-chart-row .who small { font-size: 12px; color: #8a8f98; }
+  .ai-chart-row .icon-btn { width: 28px; height: 28px; opacity: 0; }
+  .ai-chart-row:hover .icon-btn, .ai-chart-row .icon-btn:focus-visible { opacity: 1; }
+  .ai-ty { flex: none; display: grid; }
+  .ai-actions { display: flex; gap: 8px; margin-top: 14px; }
+  .ai-actions .btn { flex: 1; justify-content: center; }
+  .ai-note { flex: none; padding: 10px 16px; font-size: 11.5px; line-height: 16px; color: #8a8f98; border-top: 1px solid #e6e6e6; background: #fff; }
+
   /* Teams | Users picker */
   .picker { display: flex; flex-direction: column; max-height: min(460px, calc(100vh - 24px)); }
   .picker .seg { margin: 10px 10px 6px; flex: none; }
@@ -459,6 +521,7 @@
 <main class="main" id="main">
   <header class="topbar">
     <h1 id="pageTitle">Dashboard</h1>
+    <button class="ai-btn" id="aiBtn" aria-label="Zia AI: create a chart or dashboard" title="Zia AI: create a chart or dashboard"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9z"/><path d="M19 15l.9 2.1 2.1.9-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.9z"/></svg><span>Zia AI</span></button>
     <div class="bell"><svg width="16" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
     <div class="avatar">HB</div>
   </header>
@@ -657,6 +720,9 @@ const ICON = {
   share: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>',
   shareS: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>',
   link: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
+  pin: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 6 3 3v1.5H7V13l3-3z"/><path d="M12 14.5V21"/></svg>',
+  pinOff: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 6 3 3v1.5H7V13l3-3z"/><path d="M12 14.5V21"/><path d="M4 4l16 16"/></svg>',
+  sparkle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9z"/><path d="M19 15l.9 2.1 2.1.9-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.9z"/></svg>',
   chevDown: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   usersW: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5a3 3 0 0 1 0 6M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>',
   globe: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>',
@@ -1399,13 +1465,14 @@ function buildCard(dash, c) {
   const isEditing = editing && editing.chartId === c.id;
   const active = activeFilters(c);
   const canFilter = !isEditing && !configMissing(c) && (c.filterable || []).length > 0;
-  const el = h(`<div class="card ${isEditing ? 'editing' : ''} ${c.layout.w > 1 ? 'wide' : ''} ${c.layout.h <= 2 ? 'short' : ''}" data-id="${c.id}" style="left:${p.left}px;top:${p.top}px;width:${p.width}px;height:${p.height}px">
+  const pinned = !!c.pinned && !isEditing;
+  const el = h(`<div class="card ${isEditing ? 'editing' : ''} ${pinned ? 'pinned' : ''} ${c.layout.w > 1 ? 'wide' : ''} ${c.layout.h <= 2 ? 'short' : ''}" data-id="${c.id}" style="left:${p.left}px;top:${p.top}px;width:${p.width}px;height:${p.height}px">
     <div class="card-head">
       <div class="card-title" title="${esc(c.title || 'New Chart')}">${esc(c.title || 'New Chart')}</div>
-      ${isEditing ? '' : `<span class="drag-handle" title="Drag to move">${ICON.grip}</span>`}
+      ${pinned ? `<span class="pin-badge" title="Pinned to the top. Unpin it from the ⋮ menu to move or resize.">${ICON.pin}</span>` : ''}
+      ${isEditing || pinned ? '' : `<span class="drag-handle" title="Drag to move">${ICON.grip}</span>`}
       <div class="card-icons">
         ${canFilter ? `<span class="tip-wrap hover-tip"><button class="icon-btn ${active.length ? 'active' : ''}" data-a="filter" aria-label="Filter chart${active.length ? ` (${active.length} active)` : ''}">${ICON.funnel}${active.length ? `<span class="badge">${active.length}</span>` : ''}</button><span class="tip">Filter chart</span></span>` : ''}
-        <span class="tip-wrap hover-tip"><button class="icon-btn" data-a="info" aria-label="About this chart">${ICON.info}</button><span class="tip">About this chart</span></span>
         <button class="icon-btn" data-a="edit" aria-label="Edit chart" ${isEditing ? 'disabled' : ''}>${ICON.pencil}</button>
         <button class="icon-btn" data-a="menu" aria-label="More options">${ICON.kebab}</button>
       </div>
@@ -1413,7 +1480,7 @@ function buildCard(dash, c) {
     ${active.length && !isEditing ? `<div class="card-chips">${active.map(([f, v]) => `<span class="fchip" title="${esc(nice(f))}: ${esc(filterSummary(f, v))}">${esc(nice(f))}: ${esc(filterSummary(f, v))}<button data-rmf="${esc(f)}" aria-label="Remove ${esc(nice(f))} filter">${ICON.xS}</button></span>`).join('')}</div>` : ''}
     <div class="card-body"></div>
     <div class="card-foot">Last updated: ${esc(fmtStamp(c.updatedAt || Date.now()))}</div>
-    ${isEditing ? '' : `<span class="resize-handle" title="Drag to resize">${ICON.resize}</span>`}
+    ${isEditing || pinned ? '' : `<span class="resize-handle" title="Drag to resize">${ICON.resize}</span>`}
   </div>`);
   const body = el.querySelector('.card-body');
   const miss = configMissing(c);
@@ -1444,16 +1511,36 @@ function buildCard(dash, c) {
     const next = Object.fromEntries(active.filter(([f]) => f !== b.dataset.rmf));
     setChartFilters(c.id, next);
   });
-  el.querySelector('[data-a=info]').onclick = e => showAbout(e.currentTarget, c);
   el.querySelector('[data-a=edit]').onclick = () => openEditor(c.id);
   el.querySelector('[data-a=menu]').onclick = e => {
     const b = e.currentTarget;
     b.classList.add('on');
-    menuPop(b, [{ label: 'Remove Chart', danger: true, icon: ICON.trash.replace('width="14" height="14"', 'width="16" height="16"'), onClick: () => removeChart(c.id) }],
-      { width: 200, gap: 2, onClose: () => b.classList.remove('on') });
+    menuPop(b, [
+      { label: 'About this chart', icon: ICON.info, onClick: () => showAbout(b, c) },
+      { label: c.pinned ? 'Unpin chart' : 'Pin chart', icon: c.pinned ? ICON.pinOff : ICON.pin, onClick: () => pinChart(c.id, !c.pinned) },
+      { label: 'Remove Chart', danger: true, icon: ICON.trash.replace('width="14" height="14"', 'width="16" height="16"'), onClick: () => removeChart(c.id) }
+    ], { width: 210, gap: 2, onClose: () => b.classList.remove('on') });
   };
-  if (!isEditing) { enableDrag(el, c); enableResize(el, c); }
+  if (!isEditing && !pinned) { enableDrag(el, c); enableResize(el, c); }
   return el;
+}
+
+// Pinning moves the chart to the top of the dashboard and locks it in place (no drag or resize) until it is unpinned.
+function pinChart(id, on) {
+  const dash = current(), c = dash && dash.charts.find(x => x.id === id); if (!c) return;
+  if (editing) { toast('Save or close the chart editor first', false); return; }
+  c.pinned = on;
+  if (on) {
+    c.pinnedAt = Date.now();
+    const pinnedList = dash.charts.filter(x => x.pinned).sort((a, b) => a.pinnedAt - b.pinnedAt);
+    const rest = dash.charts.filter(x => !x.pinned).sort((a, b) => a.layout.y - b.layout.y || a.layout.x - b.layout.x);
+    const placed = [];
+    [...pinnedList, ...rest].forEach(x => { x.layout = freeSlot(placed, x.layout.w, x.layout.h); placed.push(x); });
+  } else delete c.pinnedAt;
+  logEvent(on ? 'Chart pinned' : 'Chart unpinned', dash, c.title, on ? 'Pinned to the top of the dashboard' : 'Unpinned, can be moved and resized again');
+  save(); renderGrid();
+  toast(on ? `“${trunc(c.title, 40)}” pinned to the top` : `“${trunc(c.title, 40)}” unpinned`);
+  if (on) { const card = document.querySelector(`.card[data-id="${id}"]`); if (card) card.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
 }
 
 let aboutEl = null;
@@ -1463,9 +1550,10 @@ function showAbout(btn, c) {
   aboutEl = h(`<div class="about"><h5>About this chart</h5><p>${esc(c.desc && c.showDesc ? c.desc : (describeChart(c) || 'This chart is not set up yet.'))}</p></div>`);
   document.body.appendChild(aboutEl);
   const r = btn.getBoundingClientRect();
-  aboutEl.style.left = Math.min(r.left - 10, innerWidth - 210) + 'px'; aboutEl.style.top = (r.bottom + 6) + 'px';
+  // Opens under the ⋮ button, lined up with its right edge
+  aboutEl.style.left = Math.min(Math.max(8, r.right - 200), innerWidth - 208) + 'px'; aboutEl.style.top = (r.bottom + 6) + 'px';
 }
-document.addEventListener('mousedown', e => { if (aboutEl && !aboutEl.contains(e.target) && !e.target.closest('[data-a=info]')) closeAbout(); });
+document.addEventListener('mousedown', e => { if (aboutEl && !aboutEl.contains(e.target)) closeAbout(); });
 
 async function removeChart(id) {
   const ok = await confirmDialog({ title: 'Remove Chart', text: 'Are you sure you want to remove this chart from the dashboard?', ok: 'Remove', danger: true });
@@ -1526,7 +1614,7 @@ new ResizeObserver(() => { if (view === 'charts') renderGrid(); }).observe($('ma
    ===================================================================== */
 let view = ({ '#audit': 'audit', '#offer': 'offer', '#disclosure': 'disclosure' })[location.hash] || 'charts';
 const auditFilter = { q: '', dash: 'All dashboards', act: 'All actions' };
-const actClass = a => /created/i.test(a) ? 'created' : /deleted|removed/i.test(a) ? 'removed' : /filter/i.test(a) ? 'filters' : /moved|resized/i.test(a) ? 'layout' : 'updated';
+const actClass = a => /created|generated/i.test(a) ? 'created' : /deleted|removed/i.test(a) ? 'removed' : /filter/i.test(a) ? 'filters' : /moved|resized/i.test(a) ? 'layout' : 'updated';
 
 
 function setView(v) {
@@ -1859,6 +1947,295 @@ function refreshDraftCard() {
   const old = document.querySelector(`.card[data-id="${editing.chartId}"]`);
   if (old) old.replaceWith(buildCard(current(), editing.draft));
 }
+
+/* =====================================================================
+   Zia AI: describe a chart or dashboard in a sentence.
+   It runs entirely in this page: a phrase interpreter turns the sentence into
+   charts built from the disclosure data. Nothing is sent anywhere.
+   ===================================================================== */
+const AI_EXAMPLES = {
+  chart: ['Pie chart of disclosures by status', 'At risk disclosures by owner', 'Average days open by track', 'Monthly trend of disclosures'],
+  dashboard: ['Executive overview of all disclosures', 'Risk dashboard for ESG disclosures', 'Disclosures by owner and region', 'Average days open by track']
+};
+const AI_TRACK_KW = [[/esg|sustainab/, 'ESG / Sustainability'], [/annual/, 'Annual Report'], [/quarterly/, 'Quarterly Filing'], [/proxy/, 'Proxy Statement']];
+const AI_REGION_KW = [[/north america|\bna\b|\bus\b|america/, 'North America'], [/emea|europe|middle east|africa/, 'EMEA'], [/apac|asia|pacific/, 'APAC']];
+const AI_GROUPS = [
+  ['Development_Track', /\b(tracks?|types?|categor(?:y|ies)|kinds?)\b/],
+  ['risk_bucket', /\b(risks?|risk levels?|health)\b/],
+  ['status', /\b(status(?:es)?|stages?|progress)\b/],
+  ['Disclosure_Date', /\b(months?|monthly|trends?|over time|timeline|time series|by date|per month)\b/],
+  ['owner', /\b(owners?|persons?|people|assignees?|who)\b/],
+  ['region', /\b(regions?|geograph(?:y|ies)|countr(?:y|ies)|areas?)\b/]
+];
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+function aiParse(text, mode) {
+  const raw = text.toLowerCase().replace(/[^a-z0-9%\/ ,.-]/g, ' ');
+  const t = ' ' + raw.replace(/\s+/g, ' ') + ' ';
+  const wantsDash = /\b(dashboard|overview|snapshot)\b/.test(t);
+  const wantsChart = /\b(charts?|graphs?|plot|tiles?|widgets?|visuali[sz]ations?)\b/.test(t);
+  // "dashboard" beats "chart"; with no clue in the sentence the selected tab decides
+  const intent = wantsDash ? 'dashboard' : wantsChart ? 'chart' : mode;
+
+  // Metric
+  const metric = /\btotal (days|time)\b/.test(t) ? 'total_days_open'
+    : /\b(avg|average|mean|how long|ageing|aging|age|days open|days)\b/.test(t) ? 'avg_days_open'
+    : /(%|\bpercent|\bpercentage|completion|complete rate)/.test(t) ? 'pct_complete' : 'disclosure_count';
+
+  // Group-by fields, in the order the person mentioned them
+  const stripped = t.replace(/\bat[- ]risk\b/g, ' ').replace(/\bon[- ]track\b/g, ' ');
+  const found = AI_GROUPS.map(([k, re]) => [k, stripped.search(re)]).filter(([, i]) => i >= 0).sort((a, b) => a[1] - b[1]).map(([k]) => k);
+  const groups = found.slice(0, 4);
+
+  // Chart type
+  const hasGroup = groups.length > 0;
+  const type = /\bpie\b/.test(t) ? 'pie' : /\b(donut|doughnut)\b/.test(t) ? 'donut' : /\b(line|trend|over time|timeline)\b/.test(t) ? 'line'
+    : /\b(table|list|tabular)\b/.test(t) ? 'table' : (!hasGroup && /\b(number|kpi|single|total|how many|count of)\b/.test(t)) ? 'datapoint'
+    : /\b(bar|column|histogram)\b/.test(t) ? 'bar' : (groups[0] === 'Disclosure_Date' ? 'line' : 'bar');
+
+  // Filters
+  const filters = {};
+  const add = (f, v) => { (filters[f] = filters[f] || { values: [] }).values.push(v); };
+  const hasQ = /\bq[1-4]\b/.test(t);
+  AI_TRACK_KW.forEach(([re, v]) => {
+    // "quarterly" on its own usually means a period ("quarterly summary", "Q2"), not the Quarterly Filing track
+    if (v === 'Quarterly Filing' ? /\bquarterly filings?\b/.test(t) || (/\bquarterly\b/.test(t) && !hasQ && !/\b(summary|overview|view)\b/.test(t)) : re.test(t)) add('Development_Track', v);
+  });
+  AI_REGION_KW.forEach(([re, v]) => { if (re.test(t)) add('region', v); });
+  OWNERS.forEach(o => { const first = o.split(' ')[0].toLowerCase(); if (t.includes(' ' + o.toLowerCase() + ' ') || new RegExp('\\b' + first + '\\b').test(t)) add('owner', o); });
+  if (!groups.includes('risk_bucket')) {
+    if (/\bat[- ]risk\b/.test(t)) add('risk_bucket', 'At Risk');
+    if (/\bon[- ]track\b/.test(t)) add('risk_bucket', 'On Track');
+  }
+  if (metric !== 'pct_complete' && /\b(completed|finished|done|closed)\b/.test(t)) add('risk_bucket', 'Complete');
+  const year = (t.match(/\b(20\d\d)\b/) || [])[1] || (/\bthis year\b/.test(t) ? String(new Date().getFullYear()) : '');
+  const q = (t.match(/\bq([1-4])\b/) || [])[1];
+  const lastN = (t.match(/\blast (\d{1,3}) days\b/) || [])[1];
+  if (q) { const y = +(year || new Date().getFullYear()), m0 = (+q - 1) * 3; filters.Disclosure_Date = { from: ymd(new Date(y, m0, 1)), to: ymd(new Date(y, m0 + 3, 0)) }; }
+  else if (lastN) { const d = new Date(); d.setDate(d.getDate() - +lastN); filters.Disclosure_Date = { from: ymd(d), to: ymd(new Date()) }; }
+  else if (year) filters.Disclosure_Date = { from: `${year}-01-01`, to: `${year}-12-31` };
+
+  // A generic "dashboard"/"overview" with no explicit grouping gets a ready-made layout
+  let template = null;
+  const generic = /\b(dashboard|overview|snapshot|summary|executive|everything|all disclosures|health)\b/.test(t);
+  const riskOnly = groups.length === 1 && groups[0] === 'risk_bucket' && !/\bby risk\b/.test(t) && /\brisk\b/.test(t);
+  if (intent === 'dashboard' && (groups.length === 0 || riskOnly) && (generic || riskOnly)) template = /\brisk/.test(t) ? 'risk' : 'overview';
+  const metricHit = /\btotal (days|time)\b|\b(avg|average|mean|how long|ageing|aging|age|days open|days)\b|(%|\bpercent|\bpercentage|completion|complete rate)/.test(t);
+  const typeHit = /\b(pie|donut|doughnut|line|trend|over time|timeline|table|list|tabular|number|kpi|single|total|how many|count of|bar|column|histogram)\b/.test(t);
+  const matched = !!(groups.length || template || Object.keys(filters).length || metricHit || typeHit || wantsDash || wantsChart);
+  return { text, intent, metric, groups: template ? [] : groups, type, filters, template, matched };
+}
+
+const aiScope = f => Object.entries(f).map(([k, v]) => `${nice(k)}: ${filterSummary(k, v)}`).join(' · ');
+function aiChart(spec, now) {
+  const c = applyDefaults({ id: uid(), autoName: false, desc: '', showDesc: false, updatedAt: now,
+    type: spec.type, x: spec.type === 'datapoint' ? null : spec.x, metric: spec.metric, filters: JSON.parse(JSON.stringify(spec.filters || {})) });
+  const base = c.type === 'datapoint' ? SHOW[c.metric] : `${SHOW[c.metric]} by ${GROUP_BY[c.x]}`;
+  const fs = activeFilters(c).slice(0, 2).map(([k, v]) => filterSummary(k, v));
+  c.title = fs.length ? `${base} · ${fs.join(', ')}` : base;
+  if (c.type === 'datapoint' && c.filters.risk_bucket && c.filters.risk_bucket.values.join() === 'At Risk') { c.icon = 'warning'; c.color = '#d92d20'; }
+  return c;
+}
+function aiPlanDashboard(p) {
+  const f = () => JSON.parse(JSON.stringify(p.filters));
+  const withRisk = () => ({ ...f(), risk_bucket: { values: ['At Risk'] } });
+  let specs = [], name = '';
+  if (p.template === 'risk') {
+    name = 'Risk Overview';
+    specs = [{ type: 'datapoint', metric: 'disclosure_count', filters: withRisk() }, { type: 'datapoint', metric: 'pct_complete', filters: f() }, { type: 'datapoint', metric: 'avg_days_open', filters: withRisk() },
+      { type: 'donut', x: 'risk_bucket', metric: 'disclosure_count', filters: f() }, { type: 'bar', x: 'Development_Track', metric: 'disclosure_count', filters: withRisk() }, { type: 'table', x: 'owner', metric: 'disclosure_count', filters: withRisk() }];
+  } else if (p.template === 'overview') {
+    name = 'Executive Overview';
+    specs = [{ type: 'datapoint', metric: 'disclosure_count', filters: f() }, { type: 'datapoint', metric: 'pct_complete', filters: f() }, { type: 'datapoint', metric: 'avg_days_open', filters: f() },
+      { type: 'bar', x: 'status', metric: 'disclosure_count', filters: f() }, { type: 'donut', x: 'risk_bucket', metric: 'disclosure_count', filters: f() },
+      { type: 'bar', x: 'Development_Track', metric: 'disclosure_count', filters: f() }, { type: 'line', x: 'Disclosure_Date', metric: 'disclosure_count', filters: f() }];
+  } else {
+    const gs = p.groups.length ? p.groups : (p.type === 'datapoint' ? [] : ['status']);
+    specs = [{ type: 'datapoint', metric: p.metric, filters: f() }];
+    gs.forEach(g => specs.push({ type: p.type === 'datapoint' ? 'bar' : (p.type === 'line' && g !== 'Disclosure_Date' ? 'bar' : p.type), x: g, metric: p.metric, filters: f() }));
+    name = p.type === 'datapoint' && !gs.length ? SHOW[p.metric] : `${SHOW[p.metric]} by ${gs.map(g => GROUP_BY[g]).join(' & ')}`;
+  }
+  const sc = aiScope(p.filters);
+  if (sc && !p.template) name += ` · ${Object.entries(p.filters).map(([k, v]) => filterSummary(k, v)).slice(0, 2).join(', ')}`;
+  else if (sc) name += ` · ${Object.entries(p.filters).map(([k, v]) => filterSummary(k, v)).slice(0, 2).join(', ')}`;
+  const now = Date.now();
+  const charts = specs.slice(0, 7).map(s => aiChart(s, now));
+  return { name: name.slice(0, 70), charts, prompt: p.text, scope: sc };
+}
+function aiLayout(charts, existing) {
+  const placed = existing.slice();
+  charts.forEach(c => { const s = defaultSize(c.type); c.layout = freeSlot(placed, s.w, s.h); placed.push(c); });
+}
+
+/* ---------- Single chart plan ---------- */
+function aiPlanChart(p) {
+  let g = p.groups[0] || null, type = p.type, note = '';
+  if (p.template) { g = p.template === 'risk' ? 'risk_bucket' : 'status'; type = p.template === 'risk' ? 'donut' : 'bar'; }
+  if (type === 'datapoint') g = null;
+  else {
+    if (!g) g = 'status';
+    if (type === 'line' && g !== 'Disclosure_Date') type = 'bar';
+    if (p.groups.length > 1) note = `You mentioned several fields, so this chart uses “${GROUP_BY[g]}”. Switch to Dashboard to get one chart for each.`;
+  }
+  const c = aiChart({ type, x: g, metric: p.metric, filters: p.filters }, Date.now());
+  return { charts: [c], name: c.title, prompt: p.text, scope: aiScope(p.filters), note };
+}
+
+// A live, read-only render of a generated chart (same drawing code as the dashboard cards)
+function aiPreview(c) {
+  const el = h(`<div class="ai-prev"><div class="ai-prev-body"></div></div>`);
+  const body = el.querySelector('.ai-prev-body');
+  const miss = configMissing(c);
+  const dash = current() || {};
+  const data = miss ? null : widgetData(dash, c);
+  if (miss || (c.type !== 'datapoint' && !data.pts.length) || (c.type === 'datapoint' && !data.n)) {
+    body.innerHTML = '<div class="ai-prev-empty">No data matches these filters</div>';
+  } else if (c.type === 'datapoint') {
+    body.innerHTML = `<div class="kpi"><span class="ic" style="background:${c.color}">${tileIcon(c.icon, 22)}</span><div><div class="num" style="color:${c.color}">${esc(fmtMetric(c.metric, data.value))}</div><div class="cap">${esc(c.yLabel || nice(c.metric))}</div></div></div>`;
+  } else if (c.type === 'table') {
+    body.innerHTML = `<div class="wtable scroll"><table><thead><tr><th>${esc(GROUP_BY[c.x] || nice(c.x))}</th><th class="n">${esc(nice(c.metric))}</th></tr></thead><tbody>${data.pts.map(pt => `<tr><td>${esc(pt.label)}</td><td class="n">${esc(fmtMetric(c.metric, pt.value))}</td></tr>`).join('')}</tbody></table></div>`;
+  } else {
+    requestAnimationFrame(() => { body.innerHTML = renderChartSVG(c, data, Math.max(200, body.clientWidth - 8), 190); });
+  }
+  return el;
+}
+
+/* ---------- Panel ---------- */
+let aiPanel = null;
+function closeAI() { if (aiPanel) { popLayer(aiPanel); aiPanel = null; } }
+
+// Put generated charts into the app: on the current dashboard or on a new one
+function aiCommit(charts, { target, name, prompt }) {
+  if (view !== 'charts') { view = 'charts'; history.replaceState(null, '', location.pathname + location.search); }
+  const detail = `Generated with Zia AI: “${prompt}”`;
+  let d;
+  if (target === 'current' && current()) {
+    d = current(); aiLayout(charts, d.charts); d.charts.push(...charts);
+    charts.forEach(c => logEvent('Chart created', d, c.title, `${typeName(c.type)} · ${detail}`));
+  } else {
+    aiLayout(charts, []);
+    d = { id: uid(), name: (name || '').trim() || 'AI dashboard', access: 'private', shares: [], charts };
+    state.dashboards.push(d); state.currentId = d.id;
+    logEvent('Dashboard created', d, '', `${detail} · ${charts.length} chart${charts.length === 1 ? '' : 's'}`);
+  }
+  save(); renderAll();
+  return d;
+}
+
+function openAI() {
+  if (aiPanel) { closeAI(); return; }
+  if (editing) { toast('Save or close the chart editor first', false); return; }
+  let mode = 'chart', plan = null;
+  const sv = d => `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const MODES = [['chart', 'Chart', '<path d="M4 20V14M9 20V11M14 20V13M19 20V8"/><path d="M3 11l6-5 5 4 7-7"/>'],
+    ['dashboard', 'Dashboard', '<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>']];
+  const PLACEHOLDER = { chart: 'E.g. Pie chart of disclosures by status', dashboard: 'E.g. Risk dashboard for ESG disclosures' };
+  const el = h(`<div class="aipanel" role="dialog" aria-label="Zia AI">
+    <div class="ai-head"><span class="ai-badge">${ICON.sparkle}</span><div class="ai-title"><b>Zia AI</b><small>Create a chart or dashboard from a sentence</small></div><button class="icon-btn" data-a="close" aria-label="Close">${ICON.xL}</button></div>
+    <div class="ai-body scroll">
+      <div class="acc-seg ai-seg" role="radiogroup" aria-label="What to generate">${MODES.map(([m, t, p]) => `<button role="radio" data-m="${m}">${sv(p)}<span>${t}</span></button>`).join('')}</div>
+      <label class="flabel" for="aiText" style="margin-top:16px">Describe what you need</label>
+      <textarea class="ptext ai-text" id="aiText" maxlength="300" rows="3"></textarea>
+      <button class="btn primary ai-go">${ICON.sparkle}<span>Generate</span></button>
+      <div class="ai-try">Try one of these</div><div class="ai-chips"></div>
+      <div class="ai-out" aria-live="polite"></div>
+    </div>
+    <div class="ai-note">Runs in your browser and understands common phrases about disclosures, such as status, risk, track, owner, region, months and “at risk”. Nothing is sent anywhere.</div>
+  </div>`);
+  const ta = el.querySelector('#aiText'), out = el.querySelector('.ai-out'), chips = el.querySelector('.ai-chips'), go = el.querySelector('.ai-go');
+  const setMode = m => {
+    mode = m; plan = null; out.innerHTML = '';
+    el.querySelectorAll('.ai-seg button').forEach(b => { const on = b.dataset.m === m; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); });
+    ta.placeholder = PLACEHOLDER[m];
+    go.querySelector('span').textContent = `Generate ${m}`;
+    chips.innerHTML = AI_EXAMPLES[m].map(x => `<button class="ai-chip">${esc(x)}</button>`).join('');
+  };
+  const close = closeAI;
+  el.querySelector('[data-a=close]').onclick = close;
+  el.querySelector('.ai-seg').onclick = e => { const b = e.target.closest('button'); if (b) setMode(b.dataset.m); };
+  chips.onclick = e => { const c = e.target.closest('.ai-chip'); if (c) { ta.value = c.textContent; run(); } };
+  ta.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); run(); } };
+  go.onclick = () => run();
+
+  function understood(p) {
+    if (!p.matched) return `I couldn't tell exactly what you meant, so I started with ${p.intent === 'chart' ? 'a simple status chart' : 'a simple status breakdown'}. Try mentioning a status, risk, track, owner, region or month.`;
+    const bits = [];
+    if (p.template && p.intent === 'dashboard') bits.push(`a <b>${p.template === 'risk' ? 'risk overview' : 'executive overview'}</b> layout`);
+    else { bits.push(`<b>${esc(SHOW[p.metric])}</b>`); if (p.groups.length) bits.push('by ' + (p.intent === 'chart' ? [p.groups[0]] : p.groups).map(g => `<b>${esc(GROUP_BY[g])}</b>`).join(' and ')); }
+    const sc = aiScope(p.filters);
+    return `I understood: ${bits.join(' ')}${sc ? `, limited to <b>${esc(sc)}</b>` : ''}.`;
+  }
+  const curName = () => current() ? '“' + esc(trunc(current().name, 20)) + '”' : '';
+
+  function run() {
+    const text = ta.value.trim();
+    if (!text) { ta.focus(); return; }
+    out.innerHTML = '<div class="ai-think" role="status"><span></span><span></span><span></span> Zia AI is working on it…</div>';
+    go.disabled = true;
+    setTimeout(() => {
+      go.disabled = false;
+      if (!aiPanel) return;
+      const p = aiParse(text, mode);
+      if (p.intent !== mode) { const keep = ta.value; setMode(p.intent); ta.value = keep; }
+      plan = p.intent === 'chart' ? aiPlanChart(p) : aiPlanDashboard(p);
+      drawPlan(p);
+    }, 650);
+  }
+
+  // Preview of what will be created, with the buttons that put it into the UI
+  function drawPlan(p) {
+    const isChart = p.intent === 'chart', n = plan.charts.length, cur = current();
+    out.innerHTML = `<div class="ai-card"><div class="ai-understood">${understood(p)}</div>
+      ${isChart ? '' : `<label class="flabel" for="aiName">Dashboard name</label><input class="input" id="aiName" maxlength="80" autocomplete="off">`}
+      <div class="ai-charts-h">Preview${isChart ? '' : ` · ${n} chart${n === 1 ? '' : 's'}`}</div>
+      <div class="ai-prevs"></div>
+      ${plan.note ? `<p class="ai-note-in">${esc(plan.note)}</p>` : ''}
+      <div class="ai-actions ai-stack"></div></div>`;
+    const prevs = out.querySelector('.ai-prevs'), acts = out.querySelector('.ai-actions');
+    if (!n) prevs.innerHTML = '<div class="acc-empty">No charts left</div>';
+    plan.charts.forEach((c, i) => {
+      const wrap = h(`<div class="ai-prev-card"><div class="ai-prev-h"><span class="who"><b></b><small></small></span>
+        ${isChart ? '' : `<button class="ai-add" data-i="${i}" ${cur ? '' : 'disabled'} title="${cur ? 'Add only this chart to the current dashboard' : 'There is no dashboard to add to'}">${ICON.plus}Add</button><button class="icon-btn" data-rm="${i}" aria-label="Remove this chart from the preview">${ICON.x}</button>`}</div></div>`);
+      wrap.querySelector('b').textContent = c.title;
+      wrap.querySelector('small').textContent = `${typeName(c.type)}${c.type === 'datapoint' ? '' : ' · ' + SHOW[c.metric]}`;
+      wrap.appendChild(aiPreview(c));
+      prevs.appendChild(wrap);
+    });
+    const nm = out.querySelector('#aiName');
+    const btn = (cls, a, html, dis) => `<button class="btn ${cls}" data-a="${a}" ${dis ? 'disabled' : ''}>${html}</button>`;
+    if (isChart) {
+      acts.innerHTML = (cur ? btn('primary', 'cur', `Add to ${curName()}`) + btn('outline', 'custom', 'Add &amp; customize') : '') + btn(cur ? 'outline' : 'primary', 'new', 'Add to a new dashboard');
+    } else {
+      acts.innerHTML = btn('primary', 'new', 'Create dashboard', !n) + btn('outline', 'cur', `Add all to ${cur ? curName() : 'current'}`, !n || !cur);
+      nm.value = plan.name;
+      nm.oninput = () => { plan.name = nm.value; acts.querySelector('[data-a=new]').disabled = !nm.value.trim() || !plan.charts.length; };
+    }
+    out.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { plan.charts.splice(+b.dataset.rm, 1); drawPlan(p); });
+    out.querySelectorAll('.ai-add').forEach(b => b.onclick = () => {
+      const [c] = plan.charts.splice(+b.dataset.i, 1);
+      aiCommit([c], { target: 'current', prompt: plan.prompt });
+      toast(`“${trunc(c.title, 40)}” added to “${current().name}”`);
+      drawPlan(p);
+    });
+    const done = (target, customize) => {
+      if (!plan.charts.length) return;
+      const charts = plan.charts.slice();
+      const d = aiCommit(charts, { target, name: plan.name, prompt: plan.prompt });
+      toast(target === 'current' ? `${charts.length} chart${charts.length === 1 ? '' : 's'} added to “${d.name}”` : `Dashboard “${d.name}” created`);
+      closeAI();
+      if (customize) openEditor(charts[0].id);
+    };
+    acts.querySelector('[data-a=new]').onclick = () => done('new', false);
+    const c1 = acts.querySelector('[data-a=cur]'); if (c1) c1.onclick = () => done('current', false);
+    const c2 = acts.querySelector('[data-a=custom]'); if (c2) c2.onclick = () => done('current', true);
+  }
+  setMode('chart');
+  pushLayer(el, close);
+  aiPanel = el;
+  ta.focus();
+}
+$('aiBtn').onclick = openAI;
+
 
 /* =====================================================================
    Boot
