@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Naeshas</title>
+<title>Naehas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -487,12 +487,163 @@
   @keyframes tin { from { transform: translateX(20px); opacity: 0; } to { transform: none; opacity: 1; } }
 
   .ttip { position: fixed; pointer-events: none; background: #000; color: #fff; font-size: 12px; line-height: 16px; padding: 6px 8px; border-radius: 6px; z-index: 120; white-space: nowrap; }
+  /* ---------- Sign-in page ---------- */
+  body.locked > .sidebar, body.locked > .main { display: none; }
+  .login { position: fixed; inset: 0; z-index: 300; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); background: #f8f9fe; overflow: auto; }
+  .lg-brand { position: relative; overflow: hidden; color: #fff; padding: 44px 56px 28px; display: flex; flex-direction: column; min-height: 100%;
+              background: radial-gradient(900px 500px at 85% -10%, rgba(138,110,255,.55), transparent 60%), linear-gradient(150deg, #06063e 0%, #1a187a 52%, #4945c6 100%); }
+  .lg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(180deg, rgba(0,0,0,.9), transparent 85%); -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.9), transparent 85%); }
+  .lg-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; }
+  .lg-orb1 { width: 340px; height: 340px; background: #7a4fe0; right: -90px; bottom: 60px; }
+  .lg-orb2 { width: 260px; height: 260px; background: #2f6fed; left: -80px; top: 38%; opacity: .35; }
+  .lg-brand > * { position: relative; }
+  .lg-brand > .lg-orb, .lg-brand > .lg-grid { position: absolute; }
+  .lg-logo { display: flex; align-items: center; gap: 12px; }
+  .lg-mark { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); box-shadow: 0 6px 20px rgba(0,0,0,.2); backdrop-filter: blur(6px); }
+  .lg-mark svg { width: 26px; height: 26px; }
+  .lg-mark.small { width: 36px; height: 36px; border-radius: 10px; background: #06063e; border: 0; box-shadow: none; }
+  .lg-mark.small svg { width: 21px; height: 21px; }
+  .lg-word { font-size: 24px; font-weight: 600; letter-spacing: -.01em; }
+  .lg-hero { margin-top: clamp(28px, 7vh, 72px); max-width: 520px; }
+  .lg-hero h2 { font-size: clamp(30px, 3.4vw, 42px); line-height: 1.12; font-weight: 600; letter-spacing: -.02em; }
+  .lg-hero p { margin-top: 16px; font-size: 16px; line-height: 25px; color: rgba(255,255,255,.78); }
+  .lg-cards { position: relative; height: 210px; margin: clamp(20px, 4vh, 40px) 0 0; max-width: 520px; flex: none; }
+  .lg-card { position: absolute; border-radius: 16px; padding: 14px 16px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 14px 34px rgba(4,4,40,.35); animation: lgfloat 7s ease-in-out infinite; }
+  .lg-card small { display: block; font-size: 12px; color: rgba(255,255,255,.7); }
+  .lg-card b { display: block; font-size: 30px; font-weight: 600; margin-top: 2px; }
+  .lg-c1 { left: 0; top: 18px; width: 150px; height: 128px; }
+  .lg-c2 { left: 170px; top: 0; width: 140px; height: 128px; animation-delay: -2.2s; }
+  .lg-c3 { left: 330px; top: 38px; width: 180px; height: 128px; animation-delay: -4.4s; }
+  .lg-spark { position: absolute; left: 16px; right: 16px; bottom: 14px; height: 36px; display: flex; align-items: flex-end; gap: 6px; }
+  .lg-spark i { flex: 1; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, #b9b7f2, #7a4fe0); }
+  .lg-donut { width: 68px; height: 68px; margin: 8px auto 0; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(#f5b301 0 5%, rgba(255,255,255,.25) 5% 100%); }
+  .lg-donut span { width: 50px; height: 50px; border-radius: 50%; background: #1d1b82; display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+  .lg-bars { display: flex; flex-direction: column; gap: 9px; margin-top: 16px; }
+  .lg-bars i { height: 9px; border-radius: 5px; background: linear-gradient(90deg, #b9b7f2, #7a4fe0); }
+  @keyframes lgfloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .lg-feats { list-style: none; margin: auto 0 0; padding: 22px 0 0; display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; color: rgba(255,255,255,.88); }
+  .lg-feats li { display: flex; align-items: center; gap: 12px; }
+  .lg-feats li span { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: rgba(255,255,255,.14); flex: none; }
+  .lg-foot { margin-top: 26px; font-size: 12px; color: rgba(255,255,255,.55); }
+
+  .lg-side { display: grid; place-items: center; padding: 32px 24px; min-height: 100%; }
+  .lg-box { width: min(420px, 100%); background: #fff; border-radius: 18px; padding: 36px 36px 28px; border: 1px solid #e9edf5; box-shadow: 0 18px 50px rgba(6,6,62,.10); }
+  .lg-mlogo { display: none; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; color: #06063e; margin-bottom: 22px; }
+  .lg-box h1 { font-size: 26px; font-weight: 600; color: #171c26; letter-spacing: -.01em; }
+  .lg-sub { margin: 6px 0 22px; font-size: 14.5px; color: #616161; }
+  .lg-box form label:not(.lg-check) { display: block; font-size: 13px; font-weight: 500; color: #333; margin: 14px 0 6px; }
+  .lg-field { position: relative; display: flex; align-items: center; height: 46px; border: 1px solid #d9dbdd; border-radius: 10px; background: #fff; transition: border-color .15s, box-shadow .15s; color: #8a8f98; }
+  .lg-field:focus-within { border-color: #4945c6; box-shadow: 0 0 0 3px rgba(73,69,198,.15); color: #4945c6; }
+  .lg-field.bad { border-color: #d92d20; box-shadow: 0 0 0 3px rgba(217,45,32,.12); }
+  .lg-field > svg { margin-left: 13px; flex: none; }
+  .lg-field input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none; padding: 0 12px; font: 400 15px Inter, sans-serif; color: #171c26; }
+  .lg-field input::placeholder { color: #9aa0ab; }
+  .lg-eye { width: 40px; height: 100%; display: grid; place-items: center; color: #8a8f98; border-radius: 0 10px 10px 0; }
+  .lg-eye:hover, .lg-eye[aria-pressed=true] { color: #4945c6; }
+  .lg-check { display: flex; align-items: center; gap: 9px; margin: 16px 0 4px; font-size: 13.5px; color: #444; cursor: pointer; user-select: none; }
+  .lg-check input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .lg-check .lg-tick { all: unset; box-sizing: border-box; width: 18px; height: 18px; border: 1.5px solid #b6b9c0; border-radius: 5px; display: grid; place-items: center; background: #fff; flex: none; transition: .12s; }
+  .lg-check .lg-tick svg { opacity: 0; }
+  .lg-check input:checked + .lg-tick { background: #4945c6; border-color: #4945c6; }
+  .lg-check input:checked + .lg-tick svg { opacity: 1; }
+  .lg-check input:focus-visible + .lg-tick { box-shadow: 0 0 0 3px rgba(73,69,198,.25); }
+  .lg-err { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: #fdecea; color: #b42318; font-size: 13px; line-height: 18px; }
+  .lg-err.shake { animation: lgshake .35s; }
+  @keyframes lgshake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+  .lg-submit { width: 100%; height: 48px; margin-top: 18px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; color: #fff; font-size: 15px; font-weight: 600;
+               background: linear-gradient(135deg, #4945c6 0%, #7a4fe0 100%); box-shadow: 0 6px 16px rgba(73,69,198,.35); transition: transform .1s, filter .15s; }
+  .lg-submit:hover:not(:disabled) { filter: brightness(1.07); }
+  .lg-submit:active:not(:disabled) { transform: translateY(1px); }
+  .lg-submit:disabled { cursor: default; opacity: .85; }
+  .lg-spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; animation: lgspin .7s linear infinite; }
+  @keyframes lgspin { to { transform: rotate(360deg); } }
+  .lg-demo { margin-top: 22px; padding: 14px 16px; border: 1px dashed #c9c8f5; border-radius: 12px; background: #f9f9ff; }
+  .lg-demo-h { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: #6b6aa8; margin-bottom: 8px; }
+  .lg-demo-h button { font-size: 12.5px; font-weight: 500; letter-spacing: 0; text-transform: none; color: #4945c6; padding: 3px 8px; border-radius: 6px; }
+  .lg-demo-h button:hover { background: #ececfb; }
+  .lg-cred { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+  .lg-cred .lg-k { width: 72px; font-size: 13px; color: #616161; flex: none; }
+  .lg-cred code { flex: 1; min-width: 0; font: 500 13.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #171c26; overflow: hidden; text-overflow: ellipsis; }
+  .lg-copy { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 6px; color: #8a8f98; }
+  .lg-copy:hover { background: #ececfb; color: #4945c6; }
+  @media (max-width: 920px) {
+    .login { grid-template-columns: 1fr; }
+    .lg-brand { display: none; }
+    .lg-mlogo { display: flex; }
+    .lg-side { padding: 20px 16px; background: linear-gradient(180deg, #eeeefd, #f8f9fe 40%); }
+    .lg-box { padding: 28px 22px 22px; }
+  }
+  @media (max-height: 760px) and (min-width: 921px) { .lg-cards { display: none; } .lg-feats { margin-top: 28px; } }
+  @media (prefers-reduced-motion: reduce) { .lg-card, .lg-spin { animation: none; } }
+
+  /* Account menu */
+  .avatar { border: 0; cursor: pointer; }
+  .avatar:hover { filter: brightness(1.05); }
+  .avatar:focus-visible { outline: 2px solid #8e8bea; outline-offset: 2px; }
+  .acct { padding: 0; }
+  .acct-h { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid #e6e6e6; }
+  .acct-h b { display: block; font-size: 14px; font-weight: 600; color: #171c26; }
+  .acct-h small { font-size: 12px; color: #616161; }
+  .acct-out { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 14px; font-size: 14px; color: #223556; }
+  .acct-out:hover { background: #f5f6fd; }
+
 </style>
 </head>
 <body>
+<!-- Sign-in page: shown until someone signs in -->
+<div class="login" id="login" hidden>
+  <section class="lg-brand" aria-hidden="true">
+    <div class="lg-orb lg-orb1"></div><div class="lg-orb lg-orb2"></div><div class="lg-grid"></div>
+    <div class="lg-logo">
+      <span class="lg-mark"><svg viewBox="0 0 26 26" fill="none"><path d="M4 22V4h3l10 13V4h3" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M22.5 18.5 L23.2 20.8 L25.5 21.5 L23.2 22.2 L22.5 24.5 L21.8 22.2 L19.5 21.5 L21.8 20.8 Z" fill="#fff"/></svg></span>
+      <span class="lg-word">Naehas</span>
+    </div>
+    <div class="lg-hero">
+      <h2>Disclosure intelligence,<br>at a glance.</h2>
+      <p>One workspace to track every disclosure, spot risk early and share the full picture with your teams.</p>
+    </div>
+    <div class="lg-cards">
+      <div class="lg-card lg-c1"><small>On track</small><b>63</b><div class="lg-spark"><i style="height:35%"></i><i style="height:55%"></i><i style="height:42%"></i><i style="height:72%"></i><i style="height:60%"></i><i style="height:88%"></i></div></div>
+      <div class="lg-card lg-c2"><small>Complete</small><div class="lg-donut"><span>4.8%</span></div></div>
+      <div class="lg-card lg-c3"><small>By status</small><div class="lg-bars"><i style="width:92%"></i><i style="width:70%"></i><i style="width:48%"></i><i style="width:30%"></i></div></div>
+    </div>
+    <ul class="lg-feats">
+      <li><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V14M9 20V11M14 20V13M19 20V8"/><path d="M3 11l6-5 5 4 7-7"/></svg></span>Live charts and dashboards</li>
+      <li><span><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9z"/></svg></span>Zia AI builds charts from a sentence</li>
+      <li><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5a3 3 0 0 1 0 6M21 20c0-2.6-1.7-4.8-4-5.6"/></svg></span>Share with the right teams</li>
+    </ul>
+    <p class="lg-foot">&copy; 2026 Naehas. All rights reserved.</p>
+  </section>
+
+  <section class="lg-side">
+    <div class="lg-box">
+      <div class="lg-mlogo"><span class="lg-mark small"><svg viewBox="0 0 26 26" fill="none"><path d="M4 22V4h3l10 13V4h3" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M22.5 18.5 L23.2 20.8 L25.5 21.5 L23.2 22.2 L22.5 24.5 L21.8 22.2 L19.5 21.5 L21.8 20.8 Z" fill="#fff"/></svg></span>Naehas</div>
+      <h1>Welcome back</h1>
+      <p class="lg-sub">Sign in to your Naehas workspace</p>
+      <form id="loginForm" novalidate>
+        <label for="lgUser">Username or email</label>
+        <div class="lg-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <input id="lgUser" type="text" autocomplete="username" placeholder="you@company.com" spellcheck="false" autocapitalize="off"></div>
+        <label for="lgPass">Password</label>
+        <div class="lg-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <input id="lgPass" type="password" autocomplete="current-password" placeholder="Enter your password">
+          <button type="button" class="lg-eye" id="lgEye" aria-label="Show password" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+        <label class="lg-check"><input type="checkbox" id="lgRemember"><span class="lg-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Keep me signed in on this device</label>
+        <div class="lg-err" id="lgErr" role="alert" hidden></div>
+        <button class="lg-submit" type="submit" id="lgSubmit"><span>Sign in</span><i class="lg-spin" hidden></i></button>
+      </form>
+      <div class="lg-demo">
+        <div class="lg-demo-h"><span>Demo access</span><button type="button" id="lgFill">Fill in for me</button></div>
+        <div class="lg-cred"><span class="lg-k">Username</span><code>demo@naehas.com</code><button type="button" class="lg-copy" data-copy="demo@naehas.com" aria-label="Copy username"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg></button></div>
+        <div class="lg-cred"><span class="lg-k">Password</span><code>Naehas@2026</code><button type="button" class="lg-copy" data-copy="Naehas@2026" aria-label="Copy password"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg></button></div>
+      </div>
+    </div>
+  </section>
+</div>
+
 
 <aside class="sidebar">
-  <svg class="logo" viewBox="0 0 26 26" fill="none" aria-label="Naeshas">
+  <svg class="logo" viewBox="0 0 26 26" fill="none" aria-label="Naehas">
     <path d="M4 22V4h3l10 13V4h3" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M22.5 18.5 L23.2 20.8 L25.5 21.5 L23.2 22.2 L22.5 24.5 L21.8 22.2 L19.5 21.5 L21.8 20.8 Z" fill="#fff"/>
   </svg>
@@ -523,7 +674,7 @@
     <h1 id="pageTitle">Dashboard</h1>
     <button class="ai-btn" id="aiBtn" aria-label="Zia AI: create a chart or dashboard" title="Zia AI: create a chart or dashboard"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9z"/><path d="M19 15l.9 2.1 2.1.9-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.9z"/></svg><span>Zia AI</span></button>
     <div class="bell"><svg width="16" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
-    <div class="avatar">HB</div>
+    <button class="avatar" id="avatarBtn" aria-label="Account menu" aria-haspopup="menu">DU</button>
   </header>
 
   <div id="chartsView">
@@ -656,6 +807,7 @@ const fmtMetric = (m, v) => isPct(m) ? `${v}%` : fmtNum(v);
 /* =====================================================================
    State + persistence
    ===================================================================== */
+// The storage keys keep the old "naeshas" spelling so dashboards and sign-ins already saved in browsers are not lost
 const STORE_KEY = 'naeshas-dashboards-v1';
 let state = null;
 try { const raw = localStorage.getItem(STORE_KEY); if (raw) state = JSON.parse(raw); } catch (e) {}
@@ -868,7 +1020,7 @@ function renderToolbar() {
   $('shareBtn').disabled = !d;
   const shares = d ? (d.shares || []) : [];
   $('shareBtn').innerHTML = `${ICON.share}<span>Share</span>${shares.length ? `<span class="av-stack">${shares.slice(0, 3).map(s => avatar(principal(s), 20)).join('')}${shares.length > 3 ? `<span class="av more" style="width:20px;height:20px">+${shares.length - 3}</span>` : ''}</span>` : ''}`;
-  $('shareBtn').title = !d ? '' : shares.length ? `Shared with ${shares.map(s => principal(s).name).join(', ')}` : d.access === 'public' ? 'Everyone at Naeshas can view' : 'Only you can access';
+  $('shareBtn').title = !d ? '' : shares.length ? `Shared with ${shares.map(s => principal(s).name).join(', ')}` : d.access === 'public' ? 'Everyone at Naehas can view' : 'Only you can access';
 }
 
 const starIcon = (on, size = 16) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${on ? '#f5b301' : 'none'}" stroke="${on ? '#f5b301' : 'currentColor'}" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>`;
@@ -933,10 +1085,10 @@ async function deleteDashboard(dash) {
    ===================================================================== */
 const DIRECTORY = {
   user: [
-    { id: 'u1', name: 'Aarav Mehta', email: 'aarav.mehta@naeshas.com' }, { id: 'u2', name: 'Priya Sharma', email: 'priya.sharma@naeshas.com' },
-    { id: 'u3', name: 'Rohan Gupta', email: 'rohan.gupta@naeshas.com' }, { id: 'u4', name: 'Ananya Iyer', email: 'ananya.iyer@naeshas.com' },
-    { id: 'u5', name: 'Vikram Singh', email: 'vikram.singh@naeshas.com' }, { id: 'u6', name: 'Meera Nair', email: 'meera.nair@naeshas.com' },
-    { id: 'u7', name: 'Karan Patel', email: 'karan.patel@naeshas.com' }, { id: 'u8', name: 'Sara Khan', email: 'sara.khan@naeshas.com' }
+    { id: 'u1', name: 'Aarav Mehta', email: 'aarav.mehta@naehas.com' }, { id: 'u2', name: 'Priya Sharma', email: 'priya.sharma@naehas.com' },
+    { id: 'u3', name: 'Rohan Gupta', email: 'rohan.gupta@naehas.com' }, { id: 'u4', name: 'Ananya Iyer', email: 'ananya.iyer@naehas.com' },
+    { id: 'u5', name: 'Vikram Singh', email: 'vikram.singh@naehas.com' }, { id: 'u6', name: 'Meera Nair', email: 'meera.nair@naehas.com' },
+    { id: 'u7', name: 'Karan Patel', email: 'karan.patel@naehas.com' }, { id: 'u8', name: 'Sara Khan', email: 'sara.khan@naehas.com' }
   ],
   team: [
     { id: 't1', name: 'Finance', members: 6 }, { id: 't2', name: 'Legal', members: 4 }, { id: 't3', name: 'Compliance', members: 5 },
@@ -957,7 +1109,7 @@ function avatar(p, size = 32) {
 }
 const dashLink = d => `${location.origin}${location.pathname}#dashboard=${d.id}`;
 const accessMode = d => d.access === 'public' ? 'public' : (d.shares || []).length ? 'shared' : 'private';
-const accessText = (mode, shares) => mode === 'public' ? 'Public · everyone at Naeshas can view'
+const accessText = (mode, shares) => mode === 'public' ? 'Public · everyone at Naehas can view'
   : mode === 'shared' ? 'Shared with ' + shares.map(s => `${principal(s).name} (${permLabel(s.perm).toLowerCase()})`).join(', ') : 'Private';
 
 // Dropdown with Teams | Users tabs. Ticking a row adds it to `shares` (in place); it stays open for several picks.
@@ -1025,7 +1177,7 @@ function accessEditor(root, model, onChange) {
   const NOTE = {
     private: 'Only you can see and edit this dashboard.',
     shared: 'Only you and the teams and users below can open this dashboard.',
-    public: 'Everyone at Naeshas can view this dashboard. Only you can edit it.'
+    public: 'Everyone at Naehas can view this dashboard. Only you can edit it.'
   };
   root.innerHTML = `
     <div class="acc-seg" role="radiogroup" aria-label="Dashboard access">${OPTS.map(([v, t, i]) => `<button role="radio" data-v="${v}">${i}<span>${t}</span></button>`).join('')}</div>
@@ -1165,9 +1317,9 @@ function openShare(dash) {
     const g = ov.querySelector('.share-general');
     g.innerHTML = `<div class="share-row">
       <span class="av gen ${pub ? 'pub' : ''}" style="width:32px;height:32px">${pub ? ICON.globe : ICON.lock}</span>
-      <div class="who"><button class="sel gen-sel"><span class="lbl">${pub ? 'Everyone at Naeshas' : 'Restricted'}</span>${ICON.chev}</button>
+      <div class="who"><button class="sel gen-sel"><span class="lbl">${pub ? 'Everyone at Naehas' : 'Restricted'}</span>${ICON.chev}</button>
       <small>${pub ? 'Anyone in your organization can view this dashboard' : 'Only you and the teams and users added above can open it'}</small></div></div>`;
-    g.querySelector('.gen-sel').onclick = e => selectPop(e.currentTarget, ['Restricted', 'Everyone at Naeshas'], pub ? 'Everyone at Naeshas' : 'Restricted', v => {
+    g.querySelector('.gen-sel').onclick = e => selectPop(e.currentTarget, ['Restricted', 'Everyone at Naehas'], pub ? 'Everyone at Naehas' : 'Restricted', v => {
       draft.access = v === 'Restricted' ? 'private' : 'public'; drawGeneral(); refresh();
     }, { width: 220 });
   }
@@ -1190,7 +1342,7 @@ function openShare(dash) {
     if (added.length) notes.push('Added ' + added.map(s => `${principal(s).name} (${permLabel(s.perm).toLowerCase()})`).join(', '));
     if (removed.length) notes.push('Removed ' + removed.map(s => principal(s).name).join(', '));
     if (changed.length) notes.push('Changed ' + changed.map(s => `${principal(s).name} to ${permLabel(s.perm).toLowerCase()}`).join(', '));
-    if (before.access !== draft.access) notes.push(`General access: ${draft.access === 'public' ? 'Everyone at Naeshas' : 'Restricted'}`);
+    if (before.access !== draft.access) notes.push(`General access: ${draft.access === 'public' ? 'Everyone at Naehas' : 'Restricted'}`);
     dash.shares = draft.shares; dash.access = draft.access;
     logEvent('Dashboard shared', dash, '', notes.join('. '));
     save(); close(); renderToolbar();
@@ -1438,7 +1590,7 @@ function renderAll() {
   $('pageTitle').textContent = VIEWS[view];
   $('chartsView').hidden = view !== 'charts'; $('auditView').hidden = view !== 'audit';
   $('disclosureView').hidden = view !== 'disclosure'; $('offerView').hidden = view !== 'offer';
-  document.title = view === 'charts' ? 'Naeshas' : `${VIEWS[view]} · Naeshas`;
+  document.title = view === 'charts' ? 'Naehas' : `${VIEWS[view]} · Naehas`;
   if (view === 'audit') renderAudit();
   else if (view === 'disclosure') renderDisclosures();
   else if (view === 'offer') renderOffers();
@@ -1702,7 +1854,7 @@ $('auditExport').onclick = () => {
     ...auditRows().map(e => [fmtStamp(e.at), e.user, e.action, e.dashboard, e.chart, e.details].map(cell).join(','))];
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([lines.join('\r\n')], { type: 'text/csv' }));
-  a.download = 'naeshas-audit-log.csv'; a.click();
+  a.download = 'naehas-audit-log.csv'; a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 };
 
@@ -2238,6 +2390,99 @@ $('aiBtn').onclick = openAI;
 
 
 /* =====================================================================
+   Sign-in. This is a demo gate that runs in the browser: the demo
+   credentials are shown on the page and in this file, so it keeps casual
+   visitors out but is not real security (that needs a server).
+   ===================================================================== */
+const DEMO_USER = { username: 'demo@naehas.com', password: 'Naehas@2026', name: 'Demo User' };
+const SESSION_KEY = 'naeshas-session';
+function getSession() {
+  try { return JSON.parse(sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY) || 'null'); } catch (e) { return null; }
+}
+const initialsOf = n => n.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+
+const lg = { root: $('login'), form: $('loginForm'), user: $('lgUser'), pass: $('lgPass'), err: $('lgErr'), submit: $('lgSubmit'), remember: $('lgRemember'), eye: $('lgEye') };
+function lgError(msg, fields = []) {
+  lg.err.textContent = msg; lg.err.hidden = false;
+  lg.err.classList.remove('shake'); void lg.err.offsetWidth; lg.err.classList.add('shake');
+  [lg.user, lg.pass].forEach(i => { const bad = fields.includes(i); i.parentElement.classList.toggle('bad', bad); i.setAttribute('aria-invalid', bad); });
+  (fields[0] || lg.user).focus();
+}
+function lgClearError() { lg.err.hidden = true; [lg.user, lg.pass].forEach(i => { i.parentElement.classList.remove('bad'); i.removeAttribute('aria-invalid'); }); }
+function setBusy(on) { lg.submit.disabled = on; lg.submit.querySelector('span').textContent = on ? 'Signing in…' : 'Sign in'; lg.submit.querySelector('.lg-spin').hidden = !on; }
+
+function showLogin() {
+  document.body.classList.add('locked');
+  document.title = 'Sign in · Naehas';
+  lg.root.hidden = false;
+  lg.form.reset(); lgClearError(); setBusy(false);
+  lg.pass.type = 'password'; lg.eye.setAttribute('aria-pressed', 'false'); lg.eye.setAttribute('aria-label', 'Show password');
+  lg.user.focus();
+}
+function unlockApp() {
+  const s = getSession();
+  document.body.classList.remove('locked');
+  lg.root.hidden = true;
+  $('avatarBtn').textContent = initialsOf(s ? s.name : DEMO_USER.name);
+  renderAll();
+}
+function signIn(remember) {
+  const s = { username: DEMO_USER.username, name: DEMO_USER.name, at: Date.now() };
+  try {
+    (remember ? localStorage : sessionStorage).setItem(SESSION_KEY, JSON.stringify(s));
+    (remember ? sessionStorage : localStorage).removeItem(SESSION_KEY);
+  } catch (e) {}
+  logEvent('User signed in', null, '', s.username);
+  unlockApp();
+  toast(`Welcome back, ${s.name.split(' ')[0]}`);
+}
+function signOut() {
+  closePop(); closeAbout(); aiPanel = null; editing = null;
+  layers.slice().forEach(l => popLayer(l.node));
+  logEvent('User signed out', null, '', (getSession() || DEMO_USER).username);
+  try { sessionStorage.removeItem(SESSION_KEY); localStorage.removeItem(SESSION_KEY); } catch (e) {}
+  showLogin();
+}
+
+lg.form.onsubmit = e => {
+  e.preventDefault();
+  const u = lg.user.value.trim(), p = lg.pass.value;
+  lgClearError();
+  if (!u && !p) return lgError('Enter your username and password.', [lg.user, lg.pass]);
+  if (!u) return lgError('Enter your username or email.', [lg.user]);
+  if (!p) return lgError('Enter your password.', [lg.pass]);
+  setBusy(true);
+  setTimeout(() => {
+    const okUser = u.toLowerCase() === DEMO_USER.username || u.toLowerCase() === 'demo';
+    if (okUser && p === DEMO_USER.password) signIn(lg.remember.checked);
+    else { setBusy(false); lg.pass.value = ''; lgError('Incorrect username or password. Check the demo details below.', [lg.user, lg.pass]); }
+  }, 700);
+};
+[lg.user, lg.pass].forEach(i => i.addEventListener('input', lgClearError));
+lg.eye.onclick = () => {
+  const show = lg.pass.type === 'password';
+  lg.pass.type = show ? 'text' : 'password';
+  lg.eye.setAttribute('aria-pressed', show); lg.eye.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+  lg.pass.focus();
+};
+$('lgFill').onclick = () => { lg.user.value = DEMO_USER.username; lg.pass.value = DEMO_USER.password; lgClearError(); lg.submit.focus(); };
+lg.root.querySelectorAll('.lg-copy').forEach(b => b.onclick = async () => {
+  try { await navigator.clipboard.writeText(b.dataset.copy); toast('Copied to clipboard'); }
+  catch (e) { toast('Could not copy. Select the text instead', false); }
+});
+
+// Account menu on the avatar
+$('avatarBtn').onclick = e => {
+  const b = e.currentTarget;
+  if (openPop && openPop.anchor === b) { closePop(); return; }
+  const s = getSession() || { name: DEMO_USER.name, username: DEMO_USER.username };
+  const el = h(`<div class="pop acct" role="menu" style="width:250px"><div class="acct-h"><span class="av" style="width:36px;height:36px;background:#4945c6;font-size:13px">${esc(initialsOf(s.name))}</span><div><b>${esc(s.name)}</b><small>${esc(s.username)}</small></div></div>
+    <button class="acct-out" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>Sign out</button></div>`);
+  el.querySelector('.acct-out').onclick = () => { closePop(); signOut(); };
+  showPop(el, b, { alignRight: true, gap: 6 });
+};
+
+/* =====================================================================
    Boot
    ===================================================================== */
 // A shared link (#dashboard=<id>) wins; otherwise arriving opens the starred dashboard, if there is one
@@ -2248,7 +2493,8 @@ if (linked && state.dashboards.some(d => d.id === linked)) {
   history.replaceState(null, '', location.pathname + location.search);
 } else if (state.favoriteId) state.currentId = state.favoriteId;
 if (!current() && state.dashboards.length) state.currentId = state.dashboards[0].id;
-renderAll();
+// Nobody gets in without signing in
+if (getSession()) unlockApp(); else { renderAll(); showLogin(); }
 </script>
 </body>
 </html>
